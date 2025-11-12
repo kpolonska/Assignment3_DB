@@ -46,9 +46,21 @@ from strong-harbor-474616-p4.assignment3_kyp.illness_records_stg r
 left join strong-harbor-474616-p4.assignment3_kyp.illnesses i
 on r.illness_id = i.id;
 
-create or replace table strong-harbor-474616-p4.assignment3_kyp.patients_dim as
-select patient_id, patient_name, patient_surname, patient_gender, birth_date_patient, patient_age, doctor_id, phone_number
-from strong-harbor-474616-p4.assignment3_kyp.patients_stg;
+create or replace table strong-harbor-474616-p4.assignment3_kyp.patients_dim AS
+select 
+  patient_id, 
+  patient_name, 
+  patient_surname, 
+  patient_gender, 
+  birth_date_patient, 
+  patient_age, 
+  doctor_id, 
+  phone_number,
+  days_in_hospital,
+  CURRENT_DATE() AS valid_from,
+  NULL AS valid_to,
+  TRUE AS is_current
+FROM strong-harbor-474616-p4.assignment3_kyp.patients_stg;
 
 create or replace table strong-harbor-474616-p4.assignment3_kyp.illnesses_dim as
 select illness_id, illness_name, illness_symptoms
